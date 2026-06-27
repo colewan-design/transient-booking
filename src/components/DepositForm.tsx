@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { format, parseISO } from 'date-fns'
+import { CheckCircle2, XCircle, Inbox } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { formatPeso } from '@/lib/utils'
 import type { Booking, Owner } from '@/lib/types'
@@ -17,7 +18,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   if (booking.status === 'confirmed') {
     return (
       <div className="text-center space-y-4 py-10">
-        <div className="text-4xl">✅</div>
+        <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto">
+          <CheckCircle2 className="w-8 h-8 text-green-500" />
+        </div>
         <h2 className="text-lg font-bold text-gray-900">Your booking is confirmed!</h2>
         <p className="text-sm text-gray-500">
           {owner.property_name} will see you on your check-in date.
@@ -30,7 +33,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   if (booking.status === 'cancelled') {
     return (
       <div className="text-center space-y-3 py-10">
-        <div className="text-4xl">❌</div>
+        <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mx-auto">
+          <XCircle className="w-8 h-8 text-red-400" />
+        </div>
         <h2 className="text-lg font-bold text-gray-900">This booking has been cancelled.</h2>
         <p className="text-sm text-gray-500">Contact the property for any questions.</p>
       </div>
@@ -40,7 +45,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   if (done) {
     return (
       <div className="text-center space-y-4 py-10">
-        <div className="text-4xl">📩</div>
+        <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mx-auto">
+          <Inbox className="w-8 h-8 text-blue-400" />
+        </div>
         <h2 className="text-lg font-bold text-gray-900">Deposit info received!</h2>
         <p className="text-sm text-gray-500">
           {owner.property_name} will review it and send you a confirmation shortly.

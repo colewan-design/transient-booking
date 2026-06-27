@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { ShieldCheck, Banknote, Zap } from 'lucide-react'
 
 const steps = [
   { title: 'Guest asks if available', desc: 'They message you on Messenger as usual.' },
@@ -9,9 +10,9 @@ const steps = [
 ]
 
 const features = [
-  { icon: '🚫', title: 'No double-booking', desc: 'Rooms are locked the moment a booking is placed.' },
-  { icon: '💸', title: 'Zero commission', desc: 'You keep 100% of every booking. No OTA fees.' },
-  { icon: '⚡', title: 'Instant confirmation', desc: 'Guests get a summary and payment instructions right away.' },
+  { Icon: ShieldCheck, title: 'No double-booking', desc: 'Rooms are locked the moment a booking is placed.' },
+  { Icon: Banknote, title: 'Zero commission', desc: 'You keep 100% of every booking. No OTA fees.' },
+  { Icon: Zap, title: 'Instant confirmation', desc: 'Guests get a summary and payment instructions right away.' },
 ]
 
 export default async function HomePage({
@@ -78,11 +79,13 @@ export default async function HomePage({
       {/* Features */}
       <section className="bg-gray-50 px-6 py-24">
         <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-10">
-          {features.map((f, i) => (
+          {features.map(({ Icon, title, desc }, i) => (
             <div key={i} className="text-center space-y-3">
-              <div className="text-4xl">{f.icon}</div>
-              <p className="font-semibold text-gray-900">{f.title}</p>
-              <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center mx-auto">
+                <Icon className="w-6 h-6 text-rose-500" />
+              </div>
+              <p className="font-semibold text-gray-900">{title}</p>
+              <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>

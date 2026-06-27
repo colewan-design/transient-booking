@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { addDays, format, parseISO, differenceInDays } from 'date-fns'
+import { Check, CalendarX, BedDouble, PartyPopper } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { calculateTotalPrice, formatPeso } from '@/lib/utils'
 import type { Owner, Room } from '@/lib/types'
@@ -157,7 +158,7 @@ export default function GuestBookingFlow({ owner, rooms }: { owner: Owner; rooms
               i === currentIndex ? 'border-rose-500 text-rose-500' :
               'border-gray-200 text-gray-300'
             }`}>
-              {i < currentIndex ? '✓' : i + 1}
+              {i < currentIndex ? <Check className="w-3 h-3" /> : i + 1}
             </div>
             <span className={`text-xs font-medium hidden sm:block ${i === currentIndex ? 'text-gray-900' : i < currentIndex ? 'text-gray-400' : 'text-gray-300'}`}>
               {STEP_LABELS[s]}
@@ -268,7 +269,7 @@ export default function GuestBookingFlow({ owner, rooms }: { owner: Owner; rooms
 
           {availableRooms.length === 0 ? (
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 text-center space-y-3">
-              <p className="text-4xl">😕</p>
+              <CalendarX className="w-10 h-10 text-gray-300 mx-auto" />
               <p className="font-semibold text-gray-800">No rooms available for those dates.</p>
               <p className="text-sm text-gray-400">Try different dates or fewer guests.</p>
               <button
@@ -288,7 +289,7 @@ export default function GuestBookingFlow({ owner, rooms }: { owner: Owner; rooms
                 >
                   {/* Placeholder image strip */}
                   <div className="h-40 bg-linear-to-br from-rose-100 via-orange-50 to-amber-100 flex items-center justify-center">
-                    <span className="text-4xl">🏠</span>
+                    <BedDouble className="w-10 h-10 text-rose-300" />
                   </div>
                   <div className="p-5 space-y-3">
                     <div className="flex items-start justify-between gap-2">
@@ -424,8 +425,8 @@ export default function GuestBookingFlow({ owner, rooms }: { owner: Owner; rooms
         <StepBar />
         <div className="space-y-5">
           <div className="text-center space-y-2 py-4">
-            <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center text-3xl mx-auto">
-              🎉
+            <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto">
+              <PartyPopper className="w-8 h-8 text-green-500" />
             </div>
             <h2 className="text-xl font-bold text-gray-900">Booking request received!</h2>
             <p className="text-sm text-gray-500 max-w-sm mx-auto">

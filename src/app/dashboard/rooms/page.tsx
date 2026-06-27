@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { formatPeso } from '@/lib/utils'
+import { BedDouble } from 'lucide-react'
 import type { Owner, Room } from '@/lib/types'
 
 export default async function RoomsPage() {
@@ -37,7 +38,7 @@ export default async function RoomsPage() {
 
       {(!rooms || rooms.length === 0) ? (
         <div className="text-center py-16 text-gray-400 space-y-2">
-          <p className="text-4xl">🛏️</p>
+          <BedDouble className="w-10 h-10 text-gray-300 mx-auto" />
           <p className="text-sm">No rooms yet. Add your first room to activate your booking link.</p>
           <Link
             href="/dashboard/rooms/new"
