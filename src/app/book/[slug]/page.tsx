@@ -24,15 +24,15 @@ export default async function GuestBookingPage({ params }: { params: Promise<{ s
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
-        <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+      <header className="bg-slate-900 sticky top-0 z-10">
+        <div className="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
           <div>
-            <h1 className="font-bold text-gray-900">{owner.property_name}</h1>
+            <h1 className="font-black text-white uppercase tracking-wide text-sm">{owner.property_name}</h1>
             {owner.contact && (
-              <p className="text-xs text-gray-400">{owner.contact}</p>
+              <p className="text-xs text-white/40">{owner.contact}</p>
             )}
           </div>
-          <span className="text-rose-500 font-bold text-sm tracking-tight">TransientBook</span>
+          <img src="/logo.png" alt="TransientBook" className="h-7 w-auto" />
         </div>
       </header>
 

@@ -43,20 +43,25 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
-      <div className="w-full max-w-sm space-y-6">
-        <div className="text-center space-y-1">
-          <Link href="/" className="text-2xl font-bold text-rose-500 tracking-tight">
-            TransientBook
+    <main className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-slate-900 via-stone-900 to-slate-800 relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{ backgroundImage: 'radial-gradient(circle at 25% 60%, #f43f5e 0%, transparent 50%), radial-gradient(circle at 75% 30%, #0d9488 0%, transparent 50%)' }}
+      />
+
+      <div className="relative w-full max-w-sm space-y-6">
+        <div className="text-center space-y-2">
+          <Link href="/" className="inline-block">
+            <img src="/logo.png" alt="TransientBook" className="h-10 w-auto mx-auto" />
           </Link>
-          <p className="text-sm text-gray-500">
-            {isSignUp ? 'Create an account for your property' : 'Sign in to your owner dashboard'}
+          <p className="text-sm text-white/50">
+            {isSignUp ? 'Create your property account' : 'Sign in to your owner dashboard'}
           </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4"
+          className="bg-white rounded-2xl p-6 space-y-4 shadow-2xl"
         >
           {error && (
             <div className="bg-red-50 text-red-700 text-sm rounded-xl px-4 py-3">{error}</div>
@@ -65,8 +70,8 @@ export default function LoginPage() {
             <div className="bg-green-50 text-green-700 text-sm rounded-xl px-4 py-3">{message}</div>
           )}
 
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700" htmlFor="email">
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide" htmlFor="email">
               Email
             </label>
             <input
@@ -80,8 +85,8 @@ export default function LoginPage() {
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700" htmlFor="password">
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide" htmlFor="password">
               Password
             </label>
             <input
@@ -107,13 +112,13 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => { setIsSignUp(!isSignUp); setError(null); setMessage(null) }}
-            className="w-full text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            className="w-full text-sm text-gray-400 hover:text-gray-600 transition-colors"
           >
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
         </form>
 
-        <p className="text-center text-xs text-gray-400">For transient house owners only</p>
+        <p className="text-center text-xs text-white/30">For transient house owners only</p>
       </div>
     </main>
   )

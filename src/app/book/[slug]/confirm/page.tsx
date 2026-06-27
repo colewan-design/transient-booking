@@ -35,9 +35,10 @@ export default async function ConfirmPage({
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100 px-4 py-4">
-        <div className="max-w-lg mx-auto">
-          <h1 className="text-lg font-bold text-gray-900">{owner.property_name}</h1>
+      <header className="bg-slate-900 sticky top-0 z-10">
+        <div className="max-w-lg mx-auto px-6 h-14 flex items-center justify-between">
+          <h1 className="font-black text-white uppercase tracking-wide text-sm">{owner.property_name}</h1>
+          <img src="/logo.png" alt="TransientBook" className="h-7 w-auto" />
         </div>
       </header>
       <div className="max-w-lg mx-auto px-4 py-6">

@@ -65,7 +65,7 @@ export default async function HomePage({
       {/* ── NAV ──────────────────────────────────────────────────── */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="text-rose-500 font-black text-lg tracking-tight uppercase">TransientBook</span>
+          <img src="/logo.png" alt="TransientBook" className="h-8 w-auto" />
           <Link
             href="/login"
             className="px-4 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:shadow-md transition-shadow"

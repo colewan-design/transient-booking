@@ -4,6 +4,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'TransientBook — Online booking for transient houses',
   description: 'Book your room in seconds. No back-and-forth. No double-booking.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
