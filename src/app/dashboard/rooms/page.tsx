@@ -31,19 +31,19 @@ export default async function RoomsPage() {
           href="/dashboard/rooms/new"
           className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
         >
-          + Dagdag
+          + Add Room
         </Link>
       </div>
 
       {(!rooms || rooms.length === 0) ? (
         <div className="text-center py-16 text-gray-400 space-y-2">
           <p className="text-4xl">🛏️</p>
-          <p className="text-sm">Wala pang rooms. Mag-dagdag ng unang room para maging live ang booking link mo.</p>
+          <p className="text-sm">No rooms yet. Add your first room to activate your booking link.</p>
           <Link
             href="/dashboard/rooms/new"
             className="inline-block mt-2 text-sm text-blue-600 hover:underline"
           >
-            Mag-dagdag ng room
+            Add a room
           </Link>
         </div>
       ) : (
@@ -59,7 +59,7 @@ export default async function RoomsPage() {
                     )}
                   </div>
                   <p className="text-sm text-gray-500">
-                    Hanggang {room.capacity} tao · {formatPeso(room.weekday_rate)}/gabi
+                    Up to {room.capacity} guests · {formatPeso(room.weekday_rate)}/night
                     {room.weekend_rate && room.weekend_rate !== room.weekday_rate &&
                       ` (${formatPeso(room.weekend_rate)} weekend)`
                     }

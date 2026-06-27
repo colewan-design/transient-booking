@@ -59,9 +59,9 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
           <Row label="Room" value={booking.room?.name ?? '—'} />
           <Row label="Check-in" value={booking.check_in} />
           <Row label="Check-out" value={booking.check_out} />
-          <Row label="Bilang ng Tao" value={String(booking.pax)} />
+          <Row label="Guests" value={String(booking.pax)} />
           {booking.total_amount && (
-            <Row label="Kabuuang Halaga" value={formatPeso(booking.total_amount)} bold />
+            <Row label="Total Amount" value={formatPeso(booking.total_amount)} bold />
           )}
         </div>
 
@@ -71,7 +71,7 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
           {booking.deposit_ref ? (
             <Row label="Reference #" value={booking.deposit_ref} />
           ) : (
-            <p className="text-sm text-gray-400">Wala pang deposit reference na na-submit.</p>
+            <p className="text-sm text-gray-400">No deposit reference submitted yet.</p>
           )}
           {booking.deposit_proof_url && (
             <div className="space-y-1">
@@ -96,7 +96,7 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
         {/* Notes */}
         {booking.notes && (
           <div className="px-5 py-4 space-y-1">
-            <p className="text-xs text-gray-500 font-medium">Notes ng Guest:</p>
+            <p className="text-xs text-gray-500 font-medium">Guest Notes</p>
             <p className="text-sm text-gray-700">{booking.notes}</p>
           </div>
         )}

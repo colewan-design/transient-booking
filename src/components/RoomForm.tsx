@@ -57,7 +57,7 @@ export default function RoomForm({ ownerId, room }: Props) {
   }
 
   async function handleDelete() {
-    if (!room || !confirm(`Sigurado ka bang i-delete ang "${room.name}"?`)) return
+    if (!room || !confirm(`Are you sure you want to delete "${room.name}"?`)) return
     setDeleting(true)
     await supabase.from('rooms').delete().eq('id', room.id)
     router.push('/dashboard/rooms')
@@ -70,7 +70,7 @@ export default function RoomForm({ ownerId, room }: Props) {
         <div className="bg-red-50 text-red-700 text-sm rounded-lg px-4 py-3">{error}</div>
       )}
 
-      <Field label="Pangalan ng Room" required>
+      <Field label="Room Name" required>
         <input
           type="text"
           required
@@ -81,7 +81,7 @@ export default function RoomForm({ ownerId, room }: Props) {
         />
       </Field>
 
-      <Field label="Max na Tao" required>
+      <Field label="Max Guests" required>
         <input
           type="number"
           required
@@ -94,7 +94,7 @@ export default function RoomForm({ ownerId, room }: Props) {
       </Field>
 
       <div className="grid grid-cols-2 gap-3">
-        <Field label="Weekday Rate (₱/gabi)" required>
+        <Field label="Weekday Rate (₱/night)" required>
           <input
             type="number"
             required
@@ -106,7 +106,7 @@ export default function RoomForm({ ownerId, room }: Props) {
             className={inputCls}
           />
         </Field>
-        <Field label="Weekend Rate (₱/gabi)">
+        <Field label="Weekend Rate (₱/night)">
           <input
             type="number"
             min={0}
@@ -136,7 +136,7 @@ export default function RoomForm({ ownerId, room }: Props) {
           onChange={e => setIsActive(e.target.checked)}
           className="w-4 h-4 rounded border-gray-300 text-blue-600"
         />
-        <span className="text-sm text-gray-700">Active (nakita ng guests)</span>
+        <span className="text-sm text-gray-700">Active (visible to guests)</span>
       </label>
 
       <div className="flex items-center gap-3 pt-2">
@@ -145,7 +145,7 @@ export default function RoomForm({ ownerId, room }: Props) {
           disabled={loading}
           className="flex-1 bg-blue-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
         >
-          {loading ? 'Sine-save...' : room ? 'I-update' : 'I-save ang Room'}
+          {loading ? 'Saving...' : room ? 'Update Room' : 'Save Room'}
         </button>
         <button
           type="button"
@@ -163,7 +163,7 @@ export default function RoomForm({ ownerId, room }: Props) {
           disabled={deleting}
           className="w-full text-sm text-red-500 hover:text-red-700 transition-colors pt-1"
         >
-          {deleting ? 'Dini-delete...' : 'I-delete ang room na ito'}
+          {deleting ? 'Deleting...' : 'Delete this room'}
         </button>
       )}
     </form>

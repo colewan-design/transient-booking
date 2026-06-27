@@ -18,9 +18,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
     return (
       <div className="text-center space-y-4 py-10">
         <div className="text-4xl">✅</div>
-        <h2 className="text-lg font-bold text-gray-900">Confirmed na ang iyong booking!</h2>
+        <h2 className="text-lg font-bold text-gray-900">Your booking is confirmed!</h2>
         <p className="text-sm text-gray-500">
-          Makikita ka ng {owner.property_name} sa iyong check-in date.
+          {owner.property_name} will see you on your check-in date.
         </p>
         <BookingSummary booking={booking} />
       </div>
@@ -31,8 +31,8 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
     return (
       <div className="text-center space-y-3 py-10">
         <div className="text-4xl">❌</div>
-        <h2 className="text-lg font-bold text-gray-900">Na-cancel ang booking na ito.</h2>
-        <p className="text-sm text-gray-500">Makipag-ugnayan sa property para sa katanungan.</p>
+        <h2 className="text-lg font-bold text-gray-900">This booking has been cancelled.</h2>
+        <p className="text-sm text-gray-500">Contact the property for any questions.</p>
       </div>
     )
   }
@@ -41,10 +41,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
     return (
       <div className="text-center space-y-4 py-10">
         <div className="text-4xl">📩</div>
-        <h2 className="text-lg font-bold text-gray-900">Na-receive ang iyong deposit info!</h2>
+        <h2 className="text-lg font-bold text-gray-900">Deposit info received!</h2>
         <p className="text-sm text-gray-500">
-          Ire-review ng {owner.property_name} at bibigyan ka ng confirmation.
-          Pasensya na habang hinihintay mo.
+          {owner.property_name} will review it and send you a confirmation shortly.
         </p>
         <BookingSummary booking={booking} />
       </div>
@@ -54,7 +53,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!ref.trim() && !file) {
-      setError('Mag-enter ng reference number o mag-upload ng screenshot ng payment.')
+      setError('Please enter a reference number or upload a payment screenshot.')
       return
     }
 
@@ -71,7 +70,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
         .upload(path, file, { upsert: true })
 
       if (uploadErr) {
-        setError('Hindi ma-upload ang file. Subukan ulit.')
+        setError('Could not upload file. Please try again.')
         setSubmitting(false)
         return
       }
@@ -89,7 +88,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
       .eq('id', booking.id)
 
     if (updateErr) {
-      setError('May error. Subukan ulit.')
+      setError('Something went wrong. Please try again.')
       setSubmitting(false)
       return
     }
@@ -101,9 +100,9 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   return (
     <div className="space-y-5">
       <div className="space-y-1">
-        <h2 className="text-base font-semibold text-gray-900">I-submit ang Deposit</h2>
+        <h2 className="text-base font-semibold text-gray-900">Submit Deposit</h2>
         <p className="text-sm text-gray-500">
-          Pagkatapos mag-GCash, i-enter ang reference number o mag-upload ng screenshot.
+          After sending via GCash, enter your reference number or upload a screenshot.
         </p>
       </div>
 
@@ -126,7 +125,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
           )}
           {booking.total_amount && (
             <p className="text-sm text-green-900">
-              <span className="text-green-700">Halaga: </span>
+              <span className="text-green-700">Amount: </span>
               <strong>{formatPeso(booking.total_amount)}</strong>
             </p>
           )}
@@ -149,7 +148,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            Screenshot ng Payment (optional)
+            Payment Screenshot (optional)
           </label>
           <input
             type="file"
@@ -164,7 +163,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
           disabled={submitting}
           className="w-full bg-blue-600 text-white rounded-lg py-3 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
         >
-          {submitting ? 'Nagsu-submit...' : 'I-submit ang Deposit'}
+          {submitting ? 'Submitting...' : 'Submit Deposit'}
         </button>
       </form>
     </div>
@@ -174,7 +173,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
 function BookingSummary({ booking }: { booking: Booking }) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 space-y-2">
-      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Iyong Booking</p>
+      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Your Booking</p>
       <p className="text-sm font-medium text-gray-900">{booking.room?.name}</p>
       <p className="text-sm text-gray-500">
         {format(parseISO(booking.check_in), 'MMM d')} – {format(parseISO(booking.check_out), 'MMM d, yyyy')}

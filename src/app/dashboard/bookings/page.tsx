@@ -47,7 +47,7 @@ export default async function BookingsPage({
   const { data: bookings } = await query as { data: Booking[] | null }
 
   const tabs = [
-    { label: 'Lahat', value: undefined },
+    { label: 'All', value: undefined },
     { label: 'Pending', value: 'pending' },
     { label: 'Confirmed', value: 'confirmed' },
     { label: 'Cancelled', value: 'cancelled' },
@@ -76,7 +76,7 @@ export default async function BookingsPage({
 
       {(!bookings || bookings.length === 0) ? (
         <div className="text-center py-16 text-gray-400">
-          <p className="text-sm">Wala pang bookings</p>
+          <p className="text-sm">No bookings yet</p>
         </div>
       ) : (
         <ul className="space-y-3">
@@ -87,7 +87,7 @@ export default async function BookingsPage({
                   <div className="space-y-1 min-w-0">
                     <p className="font-medium text-gray-900 truncate">{booking.guest_name}</p>
                     <p className="text-sm text-gray-500">
-                      {booking.room?.name} · {booking.pax} tao
+                      {booking.room?.name} · {booking.pax} {booking.pax === 1 ? 'guest' : 'guests'}
                     </p>
                     <p className="text-sm text-gray-500">
                       {booking.check_in} → {booking.check_out}

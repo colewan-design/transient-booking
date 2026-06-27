@@ -50,7 +50,7 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
 
     if (err) {
       if (err.message.includes('unique') || err.code === '23505') {
-        setError('Ang slug na iyan ay ginagamit na ng ibang property. Pumili ng iba.')
+        setError('That URL slug is already taken. Please choose another.')
       } else {
         setError(err.message)
       }
@@ -68,16 +68,16 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 space-y-4">
       {error && <div className="bg-red-50 text-red-700 text-sm rounded-lg px-4 py-3">{error}</div>}
-      {success && <div className="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3">Na-save ang settings!</div>}
+      {success && <div className="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3">Settings saved!</div>}
 
       <h2 className="text-sm font-semibold text-gray-700">Property Info</h2>
 
-      <Field label="Iyong Pangalan" required>
+      <Field label="Your Name" required>
         <input type="text" required value={name} onChange={e => setName(e.target.value)}
           placeholder="Juan dela Cruz" className={inputCls} />
       </Field>
 
-      <Field label="Pangalan ng Property" required>
+      <Field label="Property Name" required>
         <input type="text" required value={propertyName}
           onChange={e => handlePropertyNameChange(e.target.value)}
           placeholder="Dela Cruz Transient House" className={inputCls} />
@@ -94,11 +94,11 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
             className="flex-1 rounded-l-none rounded-r-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none" />
         </div>
         {bookingUrl && (
-          <p className="text-xs text-gray-400 mt-1">Iyong link: <span className="text-blue-500">{bookingUrl}</span></p>
+          <p className="text-xs text-gray-400 mt-1">Your link: <span className="text-blue-500">{bookingUrl}</span></p>
         )}
       </Field>
 
-      <Field label="Contact (para sa guests)">
+      <Field label="Contact (shown to guests)">
         <input type="text" value={contact} onChange={e => setContact(e.target.value)}
           placeholder="+63 912 345 6789" className={inputCls} />
       </Field>
@@ -106,7 +106,7 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
       <div className="border-t border-gray-100 pt-4 space-y-4">
         <h2 className="text-sm font-semibold text-gray-700">GCash Details</h2>
         <p className="text-xs text-gray-500">
-          Ito ang makikita ng guest para sa deposit payment.
+          Guests will see this for deposit payments.
         </p>
 
         <Field label="GCash Number">
@@ -122,7 +122,7 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
 
       <button type="submit" disabled={loading}
         className="w-full bg-blue-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors">
-        {loading ? 'Sine-save...' : 'I-save ang Settings'}
+        {loading ? 'Saving...' : 'Save Settings'}
       </button>
     </form>
   )

@@ -28,7 +28,7 @@ export default async function EditRoomPage({ params }: { params: Promise<{ id: s
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-bold text-gray-900">I-edit ang Room</h1>
+      <h1 className="text-xl font-bold text-gray-900">Edit Room</h1>
       <RoomForm ownerId={owner.id} room={room} />
     </div>
   )
