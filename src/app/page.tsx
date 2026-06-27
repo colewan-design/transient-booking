@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 const steps = [
@@ -13,7 +14,17 @@ const features = [
   { icon: '⚡', title: 'Instant confirmation', desc: 'Guests get a summary and payment instructions right away.' },
 ]
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ code?: string; next?: string }>
+}) {
+  const params = await searchParams
+  if (params.code) {
+    const qs = new URLSearchParams({ code: params.code, ...(params.next ? { next: params.next } : {}) })
+    redirect(`/auth/callback?${qs}`)
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
