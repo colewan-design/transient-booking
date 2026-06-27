@@ -6,22 +6,22 @@ const previewCards = [
   {
     label: 'Budget Stays',
     sub: '₱500 – ₱900 / night',
-    gradient: 'from-stone-800 via-stone-700 to-amber-900',
+    img: '/card-1.png',
   },
   {
     label: 'Family Suites',
     sub: 'Up to 10 guests',
-    gradient: 'from-slate-800 via-slate-700 to-teal-900',
+    img: '/card-2.png',
   },
   {
     label: 'Deluxe Rooms',
     sub: '₱1,200 – ₱2,000 / night',
-    gradient: 'from-rose-900 via-rose-800 to-slate-900',
+    img: '/card-3.png',
   },
   {
     label: 'Weekend Getaways',
     sub: 'Beach & mountain stays',
-    gradient: 'from-teal-900 via-teal-800 to-slate-900',
+    img: '/card-4.png',
   },
 ]
 
@@ -130,10 +130,13 @@ export default async function HomePage({
         {/* Left: photo card grid */}
         <div className="flex-1 grid grid-cols-2">
           {previewCards.map((card, i) => (
-            <div
-              key={i}
-              className={`relative aspect-square bg-linear-to-br ${card.gradient} overflow-hidden group`}
-            >
+            <div key={i} className="relative aspect-square overflow-hidden group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={card.img}
+                alt={card.label}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
               <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-black/70 to-transparent p-5">
                 <p className="text-white font-bold text-lg leading-tight">{card.label}</p>
