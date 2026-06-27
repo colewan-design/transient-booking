@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'TransientBook — Para sa mga transient house sa Pilipinas',
+  title: 'TransientBook — Online booking for transient houses',
   description: 'Book your room in seconds. No back-and-forth. No double-booking.',
 }
 

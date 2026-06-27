@@ -23,18 +23,22 @@ export default async function GuestBookingPage({ params }: { params: Promise<{ s
     .order('weekday_rate', { ascending: true }) as { data: Room[] | null }
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-100 px-4 py-4">
-        <div className="max-w-lg mx-auto">
-          <h1 className="text-lg font-bold text-gray-900">{owner.property_name}</h1>
-          {owner.contact && (
-            <p className="text-sm text-gray-500">{owner.contact}</p>
-          )}
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div>
+            <h1 className="font-bold text-gray-900">{owner.property_name}</h1>
+            {owner.contact && (
+              <p className="text-xs text-gray-400">{owner.contact}</p>
+            )}
+          </div>
+          <span className="text-rose-500 font-bold text-sm tracking-tight">TransientBook</span>
         </div>
       </header>
-      <div className="max-w-lg mx-auto px-4 py-6">
+
+      <main className="max-w-2xl mx-auto px-6 py-8">
         <GuestBookingFlow owner={owner} rooms={rooms ?? []} />
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }

@@ -15,20 +15,19 @@ export default async function DashboardPage() {
     .eq('user_id', user.id)
     .single() as { data: Owner | null }
 
-  // If no owner profile yet, prompt setup
   if (!owner) {
     return (
       <div className="space-y-4">
-        <h1 className="text-xl font-bold text-gray-900">Welcome sa TransientBook!</h1>
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 space-y-3">
-          <p className="text-sm text-blue-800">
-            I-setup muna ang iyong property para makuha ang iyong booking link.
+        <h1 className="text-2xl font-bold text-gray-900">Welcome to TransientBook</h1>
+        <div className="bg-rose-50 border border-rose-100 rounded-2xl p-6 space-y-4">
+          <p className="text-sm text-rose-800">
+            Set up your property profile to get your personal booking link.
           </p>
           <Link
             href="/dashboard/settings"
-            className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block px-5 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-full hover:bg-rose-600 transition-colors"
           >
-            I-setup ang property
+            Set up property
           </Link>
         </div>
       </div>
@@ -54,43 +53,43 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-gray-900">{owner.property_name}</h1>
-        <p className="text-sm text-gray-500">Owner dashboard</p>
+        <h1 className="text-2xl font-bold text-gray-900">{owner.property_name}</h1>
+        <p className="text-sm text-gray-400 mt-0.5">Owner dashboard</p>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <p className="text-3xl font-bold text-gray-900">{rooms?.length ?? 0}</p>
+          <p className="text-sm text-gray-400 mt-1">Active rooms</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <p className="text-3xl font-bold text-rose-500">{pendingBookings?.length ?? 0}</p>
+          <p className="text-sm text-gray-400 mt-1">Pending bookings</p>
+        </div>
       </div>
 
       {/* Booking link */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-700">Iyong booking link</h2>
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-3">
+        <h2 className="text-sm font-semibold text-gray-700">Your booking link</h2>
         <div className="flex items-center gap-2">
-          <code className="flex-1 text-sm bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 truncate text-gray-800">
+          <code className="flex-1 text-sm bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 truncate text-gray-700">
             {bookingUrl}
           </code>
           <CopyButton text={bookingUrl} />
         </div>
-        <p className="text-xs text-gray-500">
-          I-paste ito sa Messenger kapag nag-message ang guest. Gagawin nila ang lahat ng steps doon.
+        <p className="text-xs text-gray-400">
+          Share this link with guests when they inquire. They complete the entire booking themselves.
         </p>
-      </div>
-
-      {/* Stats row */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
-          <p className="text-2xl font-bold text-gray-900">{rooms?.length ?? 0}</p>
-          <p className="text-sm text-gray-500">Active rooms</p>
-        </div>
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
-          <p className="text-2xl font-bold text-orange-600">{pendingBookings?.length ?? 0}</p>
-          <p className="text-sm text-gray-500">Pending bookings</p>
-        </div>
       </div>
 
       {/* Pending bookings */}
       {(pendingBookings?.length ?? 0) > 0 && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
-          <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-gray-50">
-            <h2 className="text-sm font-semibold text-gray-700">Pending na Bookings</h2>
-            <Link href="/dashboard/bookings" className="text-xs text-blue-600 hover:underline">
-              Tingnan lahat
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-50">
+            <h2 className="text-sm font-semibold text-gray-700">Pending Bookings</h2>
+            <Link href="/dashboard/bookings" className="text-xs text-rose-500 hover:text-rose-600 font-medium">
+              View all
             </Link>
           </div>
           <ul className="divide-y divide-gray-50">
@@ -98,15 +97,15 @@ export default async function DashboardPage() {
               <li key={booking.id}>
                 <Link
                   href={`/dashboard/bookings/${booking.id}`}
-                  className="flex items-center justify-between px-5 py-3 hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
                 >
                   <div>
                     <p className="text-sm font-medium text-gray-900">{booking.guest_name}</p>
-                    <p className="text-xs text-gray-500">
-                      {booking.room?.name} · {booking.check_in} → {booking.check_out}
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {booking.room?.name} &middot; {booking.check_in} &rarr; {booking.check_out}
                     </p>
                   </div>
-                  <span className="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded-full font-medium">
+                  <span className="text-xs bg-amber-50 text-amber-600 px-2.5 py-1 rounded-full font-medium">
                     Pending
                   </span>
                 </Link>
@@ -117,17 +116,16 @@ export default async function DashboardPage() {
       )}
 
       {(rooms?.length ?? 0) === 0 && (
-        <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
+        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
           <p className="text-sm text-amber-800">
-            Wala pang rooms.{' '}
-            <Link href="/dashboard/rooms/new" className="underline font-medium">
-              Mag-dagdag ng room
+            No rooms yet.{' '}
+            <Link href="/dashboard/rooms/new" className="underline font-semibold">
+              Add a room
             </Link>{' '}
-            para maging live ang iyong booking link.
+            to activate your booking link.
           </p>
         </div>
       )}
     </div>
   )
 }
-

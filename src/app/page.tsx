@@ -1,51 +1,97 @@
 import Link from 'next/link'
 
+const steps = [
+  { title: 'Guest asks if available', desc: 'They message you on Messenger as usual.' },
+  { title: 'You share your link', desc: 'Paste your unique booking link in the chat.' },
+  { title: 'Guest picks dates & room', desc: 'They see real-time availability and pricing.' },
+  { title: 'They pay the deposit', desc: 'GCash deposit sent — booking confirmed.' },
+]
+
+const features = [
+  { icon: '🚫', title: 'No double-booking', desc: 'Rooms are locked the moment a booking is placed.' },
+  { icon: '💸', title: 'Zero commission', desc: 'You keep 100% of every booking. No OTA fees.' },
+  { icon: '⚡', title: 'Instant confirmation', desc: 'Guests get a summary and payment instructions right away.' },
+]
+
 export default function HomePage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen px-4 bg-linear-to-b from-blue-50 to-white">
-      <div className="max-w-lg w-full text-center space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-gray-900">TransientBook</h1>
-          <p className="text-lg text-gray-600">
-            Para sa mga transient house na tired na sa Messenger grind.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-left space-y-4">
-          <h2 className="font-semibold text-gray-800">Paano gumagana?</h2>
-          <ol className="space-y-3 text-sm text-gray-600">
-            <li className="flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center">1</span>
-              <span>Guest messages &ldquo;available po?&rdquo; sa Messenger</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center">2</span>
-              <span>Owner pinaste ang booking link</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center">3</span>
-              <span>Guest pumili ng dates, nakita agad ang available rooms at presyo</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center">4</span>
-              <span>Nag-reserve, nagpadala ng GCash deposit — tapos na!</span>
-            </li>
-          </ol>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+    <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <nav className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="text-rose-500 font-bold text-xl tracking-tight">TransientBook</span>
           <Link
             href="/login"
-            className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:shadow-md transition-shadow"
           >
-            Owner? Sign in dito
+            Sign in
           </Link>
         </div>
+      </nav>
 
-        <p className="text-xs text-gray-400">
-          No double-booking. No missed inquiries. No OTA commission.
-        </p>
-      </div>
-    </main>
+      {/* Hero */}
+      <section className="pt-16">
+        <div className="bg-linear-to-b from-rose-50 via-rose-50/40 to-white px-6 py-28 text-center">
+          <h1 className="text-5xl font-bold text-gray-900 tracking-tight leading-tight">
+            Book your stay,<br />skip the back-and-forth.
+          </h1>
+          <p className="mt-5 text-lg text-gray-500 max-w-md mx-auto leading-relaxed">
+            A booking page for your transient house. Share a link — guests book themselves.
+          </p>
+          <Link
+            href="/login"
+            className="mt-8 inline-block px-8 py-3.5 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition-colors shadow-sm"
+          >
+            Get started free
+          </Link>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="max-w-5xl mx-auto px-6 py-24">
+        <h2 className="text-2xl font-bold text-gray-900 text-center mb-3">How it works</h2>
+        <p className="text-center text-gray-500 mb-12">Four steps from inquiry to confirmed booking.</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {steps.map((step, i) => (
+            <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-3 hover:shadow-md transition-shadow">
+              <div className="w-9 h-9 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center font-bold text-sm">
+                {i + 1}
+              </div>
+              <p className="font-semibold text-gray-900 text-sm">{step.title}</p>
+              <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="bg-gray-50 px-6 py-24">
+        <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-10">
+          {features.map((f, i) => (
+            <div key={i} className="text-center space-y-3">
+              <div className="text-4xl">{f.icon}</div>
+              <p className="font-semibold text-gray-900">{f.title}</p>
+              <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="px-6 py-24 text-center">
+        <h2 className="text-2xl font-bold text-gray-900">Ready to accept online bookings?</h2>
+        <p className="mt-2 text-gray-500">Create your property profile in minutes.</p>
+        <Link
+          href="/login"
+          className="mt-7 inline-block px-8 py-3.5 bg-rose-500 text-white rounded-full font-semibold hover:bg-rose-600 transition-colors shadow-sm"
+        >
+          Create your booking page
+        </Link>
+      </section>
+
+      <footer className="border-t border-gray-100 px-6 py-8 text-center text-xs text-gray-400">
+        © {new Date().getFullYear()} TransientBook &middot; No double-booking. No missed inquiries. No OTA commission.
+      </footer>
+    </div>
   )
 }

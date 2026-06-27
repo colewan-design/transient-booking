@@ -27,12 +27,12 @@ export default function LoginPage() {
       if (error) {
         setError(error.message)
       } else {
-        setMessage('Check your email para i-confirm ang account mo!')
+        setMessage('Check your email to confirm your account.')
       }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) {
-        setError('Mali ang email o password.')
+        setError('Incorrect email or password.')
       } else {
         router.push('/dashboard')
         router.refresh()
@@ -46,22 +46,23 @@ export default function LoginPage() {
     <main className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <div className="w-full max-w-sm space-y-6">
         <div className="text-center space-y-1">
-          <Link href="/" className="text-2xl font-bold text-gray-900">TransientBook</Link>
+          <Link href="/" className="text-2xl font-bold text-rose-500 tracking-tight">
+            TransientBook
+          </Link>
           <p className="text-sm text-gray-500">
-            {isSignUp ? 'Gawa ng account para sa iyong property' : 'Mag-sign in sa owner dashboard'}
+            {isSignUp ? 'Create an account for your property' : 'Sign in to your owner dashboard'}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4"
+        >
           {error && (
-            <div className="bg-red-50 text-red-700 text-sm rounded-lg px-4 py-3">
-              {error}
-            </div>
+            <div className="bg-red-50 text-red-700 text-sm rounded-xl px-4 py-3">{error}</div>
           )}
           {message && (
-            <div className="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3">
-              {message}
-            </div>
+            <div className="bg-green-50 text-green-700 text-sm rounded-xl px-4 py-3">{message}</div>
           )}
 
           <div className="space-y-1">
@@ -74,7 +75,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+              className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-rose-400 focus:ring-1 focus:ring-rose-400 outline-none transition-colors"
               placeholder="owner@example.com"
             />
           </div>
@@ -90,7 +91,7 @@ export default function LoginPage() {
               minLength={6}
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+              className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-rose-400 focus:ring-1 focus:ring-rose-400 outline-none transition-colors"
               placeholder="••••••••"
             />
           </div>
@@ -98,9 +99,9 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="w-full bg-rose-500 text-white rounded-xl py-2.5 text-sm font-semibold hover:bg-rose-600 disabled:opacity-50 transition-colors"
           >
-            {loading ? 'Loading...' : isSignUp ? 'Gawa ng account' : 'Sign in'}
+            {loading ? 'Loading...' : isSignUp ? 'Create account' : 'Sign in'}
           </button>
 
           <button
@@ -108,13 +109,11 @@ export default function LoginPage() {
             onClick={() => { setIsSignUp(!isSignUp); setError(null); setMessage(null) }}
             className="w-full text-sm text-gray-500 hover:text-gray-700 transition-colors"
           >
-            {isSignUp ? 'Mayroon nang account? Sign in' : 'Wala pang account? Sign up'}
+            {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
         </form>
 
-        <p className="text-center text-xs text-gray-400">
-          Para sa mga may-ari ng transient house lang
-        </p>
+        <p className="text-center text-xs text-gray-400">For transient house owners only</p>
       </div>
     </main>
   )
