@@ -65,7 +65,7 @@ export default async function BookingsPage({
             href={tab.value ? `/dashboard/bookings?status=${tab.value}` : '/dashboard/bookings'}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
               status === tab.value
-                ? 'bg-blue-50 text-blue-700'
+                ? 'bg-rose-50 text-rose-600'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >

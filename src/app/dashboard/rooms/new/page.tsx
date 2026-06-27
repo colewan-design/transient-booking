@@ -18,7 +18,7 @@ export default async function NewRoomPage() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-xl font-bold text-gray-900">Bagong Room</h1>
+      <h1 className="text-xl font-bold text-gray-900">New Room</h1>
       <RoomForm ownerId={owner.id} />
     </div>
   )

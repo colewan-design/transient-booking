@@ -66,7 +66,7 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
   const bookingUrl = slug ? `${process.env.NEXT_PUBLIC_APP_URL ?? window?.location?.origin}/book/${slug}` : ''
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 space-y-4">
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
       {error && <div className="bg-red-50 text-red-700 text-sm rounded-lg px-4 py-3">{error}</div>}
       {success && <div className="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3">Settings saved!</div>}
 
@@ -91,10 +91,10 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
           <input type="text" required value={slug}
             onChange={e => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
             placeholder="dela-cruz-transient"
-            className="flex-1 rounded-l-none rounded-r-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none" />
+            className="flex-1 rounded-l-none rounded-r-lg border border-gray-300 px-3 py-2 text-sm focus:border-rose-400 focus:ring-1 focus:ring-rose-400 outline-none transition-colors" />
         </div>
         {bookingUrl && (
-          <p className="text-xs text-gray-400 mt-1">Your link: <span className="text-blue-500">{bookingUrl}</span></p>
+          <p className="text-xs text-gray-400 mt-1">Your link: <span className="text-rose-500">{bookingUrl}</span></p>
         )}
       </Field>
 
@@ -121,7 +121,7 @@ export default function SettingsForm({ userId, owner }: { userId: string; owner:
       </div>
 
       <button type="submit" disabled={loading}
-        className="w-full bg-blue-600 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors">
+        className="w-full bg-rose-500 text-white rounded-xl py-2.5 text-sm font-semibold hover:bg-rose-600 disabled:opacity-50 transition-colors">
         {loading ? 'Saving...' : 'Save Settings'}
       </button>
     </form>
@@ -139,4 +139,4 @@ function Field({ label, required, children }: { label: string; required?: boolea
   )
 }
 
-const inputCls = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none'
+const inputCls = 'w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-rose-400 focus:ring-1 focus:ring-rose-400 outline-none transition-colors'

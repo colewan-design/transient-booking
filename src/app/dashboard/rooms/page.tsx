@@ -30,7 +30,7 @@ export default async function RoomsPage() {
         <h1 className="text-xl font-bold text-gray-900">Rooms</h1>
         <Link
           href="/dashboard/rooms/new"
-          className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-rose-500 text-white text-sm font-semibold rounded-full hover:bg-rose-600 transition-colors"
         >
           + Add Room
         </Link>
@@ -42,7 +42,7 @@ export default async function RoomsPage() {
           <p className="text-sm">No rooms yet. Add your first room to activate your booking link.</p>
           <Link
             href="/dashboard/rooms/new"
-            className="inline-block mt-2 text-sm text-blue-600 hover:underline"
+            className="inline-block mt-2 text-sm text-rose-500 hover:text-rose-600 font-medium"
           >
             Add a room
           </Link>

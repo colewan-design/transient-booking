@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import type { Booking, Owner } from '@/lib/types'
 import CopyButton from '@/components/CopyButton'
+import { BedDouble, CalendarCheck, ArrowRight } from 'lucide-react'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -18,16 +19,19 @@ export default async function DashboardPage() {
   if (!owner) {
     return (
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-gray-900">Welcome to TransientBook</h1>
-        <div className="bg-rose-50 border border-rose-100 rounded-2xl p-6 space-y-4">
-          <p className="text-sm text-rose-800">
-            Set up your property profile to get your personal booking link.
+        <div>
+          <h1 className="text-2xl font-black uppercase tracking-wide text-gray-900">Welcome</h1>
+          <p className="text-sm text-gray-400 mt-0.5">Set up your property to get started.</p>
+        </div>
+        <div className="bg-slate-900 rounded-2xl p-6 space-y-4">
+          <p className="text-sm text-white/70">
+            Create your property profile to get a personal booking link you can share with guests.
           </p>
           <Link
             href="/dashboard/settings"
-            className="inline-block px-5 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-full hover:bg-rose-600 transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-full hover:bg-rose-600 transition-colors"
           >
-            Set up property
+            Set up property <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
@@ -53,33 +57,46 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">{owner.property_name}</h1>
+        <h1 className="text-2xl font-black uppercase tracking-wide text-gray-900">{owner.property_name}</h1>
         <p className="text-sm text-gray-400 mt-0.5">Owner dashboard</p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-          <p className="text-3xl font-bold text-gray-900">{rooms?.length ?? 0}</p>
-          <p className="text-sm text-gray-400 mt-1">Active rooms</p>
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0">
+            <BedDouble className="w-5 h-5 text-slate-500" />
+          </div>
+          <div>
+            <p className="text-3xl font-black text-gray-900">{rooms?.length ?? 0}</p>
+            <p className="text-xs text-gray-400 mt-0.5 uppercase tracking-wide">Active rooms</p>
+          </div>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-          <p className="text-3xl font-bold text-rose-500">{pendingBookings?.length ?? 0}</p>
-          <p className="text-sm text-gray-400 mt-1">Pending bookings</p>
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+          <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center shrink-0">
+            <CalendarCheck className="w-5 h-5 text-rose-500" />
+          </div>
+          <div>
+            <p className="text-3xl font-black text-rose-500">{pendingBookings?.length ?? 0}</p>
+            <p className="text-xs text-gray-400 mt-0.5 uppercase tracking-wide">Pending</p>
+          </div>
         </div>
       </div>
 
-      {/* Booking link */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-3">
-        <h2 className="text-sm font-semibold text-gray-700">Your booking link</h2>
+      {/* Booking link — dark card */}
+      <div className="bg-slate-900 rounded-2xl p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-bold uppercase tracking-widest text-white/50">Your booking link</h2>
+          <span className="text-xs text-teal-400 font-medium">Live</span>
+        </div>
         <div className="flex items-center gap-2">
-          <code className="flex-1 text-sm bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 truncate text-gray-700">
+          <code className="flex-1 text-sm bg-white/10 rounded-xl px-3 py-2.5 truncate text-white/80">
             {bookingUrl}
           </code>
           <CopyButton text={bookingUrl} />
         </div>
-        <p className="text-xs text-gray-400">
-          Share this link with guests when they inquire. They complete the entire booking themselves.
+        <p className="text-xs text-white/30">
+          Share this link with guests. They complete the entire booking themselves.
         </p>
       </div>
 
@@ -116,10 +133,10 @@ export default async function DashboardPage() {
       )}
 
       {(rooms?.length ?? 0) === 0 && (
-        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
-          <p className="text-sm text-amber-800">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <p className="text-sm text-gray-500">
             No rooms yet.{' '}
-            <Link href="/dashboard/rooms/new" className="underline font-semibold">
+            <Link href="/dashboard/rooms/new" className="text-rose-500 hover:text-rose-600 font-semibold underline underline-offset-2">
               Add a room
             </Link>{' '}
             to activate your booking link.

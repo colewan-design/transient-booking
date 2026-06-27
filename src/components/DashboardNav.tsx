@@ -24,10 +24,10 @@ export default function DashboardNav({ owner }: { owner: Owner | null }) {
   ]
 
   return (
-    <header className="bg-white border-b border-gray-100 sticky top-0 z-10">
+    <header className="bg-white/90 backdrop-blur border-b border-gray-100 sticky top-0 z-10">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <span className="text-rose-500 font-bold text-lg tracking-tight">
+        <div className="flex items-center justify-between h-14">
+          <span className="text-rose-500 font-black text-lg tracking-tight uppercase">
             {owner?.property_name ?? 'TransientBook'}
           </span>
 

@@ -45,8 +45,8 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   if (done) {
     return (
       <div className="text-center space-y-4 py-10">
-        <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mx-auto">
-          <Inbox className="w-8 h-8 text-blue-400" />
+        <div className="w-16 h-16 rounded-full bg-teal-50 flex items-center justify-center mx-auto">
+          <Inbox className="w-8 h-8 text-teal-500" />
         </div>
         <h2 className="text-lg font-bold text-gray-900">Deposit info received!</h2>
         <p className="text-sm text-gray-500">
@@ -107,7 +107,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
   return (
     <div className="space-y-5">
       <div className="space-y-1">
-        <h2 className="text-base font-semibold text-gray-900">Submit Deposit</h2>
+        <h2 className="text-base font-black uppercase tracking-wide text-gray-900">Submit Deposit</h2>
         <p className="text-sm text-gray-500">
           After sending via GCash, enter your reference number or upload a screenshot.
         </p>
@@ -149,7 +149,7 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
             value={ref}
             onChange={e => setRef(e.target.value)}
             placeholder="e.g. 1234567890"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:border-rose-400 focus:ring-1 focus:ring-rose-400 outline-none transition-colors"
           />
         </div>
 
@@ -161,14 +161,14 @@ export default function DepositForm({ booking, owner }: { booking: Booking; owne
             type="file"
             accept="image/*"
             onChange={e => setFile(e.target.files?.[0] ?? null)}
-            className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-rose-50 file:text-rose-600 hover:file:bg-rose-100"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-blue-600 text-white rounded-lg py-3 text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="w-full bg-rose-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-rose-600 disabled:opacity-50 transition-colors"
         >
           {submitting ? 'Submitting...' : 'Submit Deposit'}
         </button>
