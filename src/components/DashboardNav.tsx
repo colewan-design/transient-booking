@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Owner } from '@/lib/types'
 
@@ -9,8 +10,10 @@ export default function DashboardNav({ owner }: { owner: Owner | null }) {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const [signingOut, setSigningOut] = useState(false)
 
   async function signOut() {
+    setSigningOut(true)
     await supabase.auth.signOut()
     router.push('/login')
     router.refresh()
@@ -49,9 +52,10 @@ export default function DashboardNav({ owner }: { owner: Owner | null }) {
 
           <button
             onClick={signOut}
-            className="text-sm text-gray-400 hover:text-gray-700 transition-colors"
+            disabled={signingOut}
+            className="text-sm text-gray-400 hover:text-gray-700 transition-colors disabled:opacity-40"
           >
-            Sign out
+            {signingOut ? 'Signing out…' : 'Sign out'}
           </button>
         </div>
       </div>
