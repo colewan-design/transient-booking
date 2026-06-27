@@ -20,6 +20,7 @@ export interface Room {
   weekday_rate: number
   weekend_rate: number | null
   description: string | null
+  photos: string[] | null
   is_active: boolean
   created_at: string
 }

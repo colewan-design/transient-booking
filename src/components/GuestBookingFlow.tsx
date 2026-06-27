@@ -3,12 +3,52 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { addDays, format, parseISO, differenceInDays } from 'date-fns'
-import { Check, CalendarX, BedDouble, PartyPopper } from 'lucide-react'
+import { Check, CalendarX, BedDouble, PartyPopper, ChevronLeft, ChevronRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { calculateTotalPrice, formatPeso } from '@/lib/utils'
 import type { Owner, Room } from '@/lib/types'
 
 type Step = 'dates' | 'rooms' | 'form' | 'done'
+
+function RoomPhotoCarousel({ photos }: { photos: string[] }) {
+  const [index, setIndex] = useState(0)
+  if (!photos.length) {
+    return (
+      <div className="h-48 bg-linear-to-br from-rose-100 via-orange-50 to-amber-100 flex items-center justify-center">
+        <BedDouble className="w-10 h-10 text-rose-300" />
+      </div>
+    )
+  }
+  return (
+    <div className="relative h-48 bg-gray-100 overflow-hidden">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={photos[index]} alt="" className="w-full h-full object-cover" />
+      {photos.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); setIndex(i => (i - 1 + photos.length) % photos.length) }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/40 text-white rounded-full flex items-center justify-center hover:bg-black/60 transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={e => { e.stopPropagation(); setIndex(i => (i + 1) % photos.length) }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/40 text-white rounded-full flex items-center justify-center hover:bg-black/60 transition-colors"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            {photos.map((_, i) => (
+              <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === index ? 'bg-white' : 'bg-white/50'}`} />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
 
 interface AvailableRoom {
   room: Room
@@ -287,10 +327,7 @@ export default function GuestBookingFlow({ owner, rooms }: { owner: Owner; rooms
                   onClick={() => { setSelectedRoom({ room, totalPrice, nights }); setStep('form') }}
                   className="w-full text-left bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-rose-200 transition-all overflow-hidden group"
                 >
-                  {/* Placeholder image strip */}
-                  <div className="h-40 bg-linear-to-br from-rose-100 via-orange-50 to-amber-100 flex items-center justify-center">
-                    <BedDouble className="w-10 h-10 text-rose-300" />
-                  </div>
+                  <RoomPhotoCarousel photos={room.photos ?? []} />
                   <div className="p-5 space-y-3">
                     <div className="flex items-start justify-between gap-2">
                       <div>

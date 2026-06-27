@@ -48,6 +48,7 @@ create table if not exists public.rooms (
   weekday_rate  numeric not null check (weekday_rate >= 0),
   weekend_rate  numeric check (weekend_rate >= 0),
   description   text,
+  photos        text[] default '{}',
   is_active     boolean default true,
   created_at    timestamptz default now()
 );
@@ -139,10 +140,13 @@ create policy "Public can update deposit proof"
   with check (true);
 
 -- ─────────────────────────────────────────────────────────────────
+-- MIGRATION: add photos column to existing rooms table
+-- ─────────────────────────────────────────────────────────────────
+alter table public.rooms add column if not exists photos text[] default '{}';
+
+-- ─────────────────────────────────────────────────────────────────
 -- STORAGE BUCKET for deposit proof images
 -- ─────────────────────────────────────────────────────────────────
--- Run in Supabase Storage UI: create a bucket called "deposits" (public)
--- Or via SQL:
 insert into storage.buckets (id, name, public)
 values ('deposits', 'deposits', true)
 on conflict do nothing;
@@ -154,3 +158,22 @@ create policy "Anyone can upload deposit proof"
 create policy "Anyone can view deposit proof"
   on storage.objects for select
   using (bucket_id = 'deposits');
+
+-- ─────────────────────────────────────────────────────────────────
+-- STORAGE BUCKET for room photos
+-- ─────────────────────────────────────────────────────────────────
+insert into storage.buckets (id, name, public)
+values ('room-photos', 'room-photos', true)
+on conflict do nothing;
+
+create policy "Authenticated owners can upload room photos"
+  on storage.objects for insert
+  with check (bucket_id = 'room-photos' and auth.role() = 'authenticated');
+
+create policy "Authenticated owners can delete room photos"
+  on storage.objects for delete
+  using (bucket_id = 'room-photos' and auth.role() = 'authenticated');
+
+create policy "Anyone can view room photos"
+  on storage.objects for select
+  using (bucket_id = 'room-photos');
